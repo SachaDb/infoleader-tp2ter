@@ -1,0 +1,63 @@
+# ==========================================================
+# InfoLeader - protections HTTP a la racine du projet
+# ==========================================================
+
+# Fichiers de dependances et outils : aucun interet public
+<FilesMatch "^(composer\.(phar|json|lock)|\.gitignore|README\.md)$">
+    Require all denied
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Masquage de la signature du serveur et en-tetes de securite
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "same-origin"
+</IfModule>
+
+# Pas de listing de repertoire
+Options -Indexes
+
+# Revalidation des fichiers statiques
+# Les pages referencent deja style.css?v=... et script.js?v=... ; cette
+# regle evite en plus qu'un navigateur serve une version perimee sans
+# verifier aupres du serveur (cause de mises en page cassees apres une
+# modification du CSS).
+<FilesMatch "\.(css|js|json)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-cache, must-revalidate"
+    </IfModule>
+</FilesMatch>
+
+# ==========================================================
+# TP 2ter - Ajouts du fork
+# ==========================================================
+
+# Pages d'erreur aux couleurs du site.
+# Avant : Apache servait sa page brute, qui annonce le serveur
+# et sa version. Le chemin est absolu depuis la racine web, il
+# contient donc le nom du dossier du fork.
+ErrorDocument 403 /infoleader-tp2ter/403.php
+ErrorDocument 404 /infoleader-tp2ter/404.php
+
+# Le catalogue brut n'a pas a etre servi directement :
+# products.php le lit sur le disque, pas par HTTP.
+<FilesMatch "^products\.json$">
+    Require all denied
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Les fichiers de documentation du projet ne sont pas du contenu public
+<FilesMatch "^(DOCUMENTATION|TODO_LIST|PROMPTS|AMELIORATIONS)\.md$">
+    Require all denied
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

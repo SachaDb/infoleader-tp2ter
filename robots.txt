@@ -1,0 +1,23 @@
+# robots.txt - InfoLeader
+# Ajoute au TP 2ter.
+#
+# Le site tourne en local et n'est atteignable par aucun robot.
+# Ce fichier decrit malgre tout la regle voulue : les pages
+# publiques sont indexables, les dossiers prives et l'espace
+# d'administration ne le sont pas.
+
+User-agent: *
+Allow: /
+
+# Espace d'administration : jamais indexe
+Disallow: /admin/
+
+# Dossiers prives (deja interdits en HTTP par .htaccess)
+Disallow: /includes/
+Disallow: /storage/
+Disallow: /vendor/
+
+# Donnees brutes du catalogue
+Disallow: /products.json
+
+Sitemap: http://localhost/infoleader-tp2ter/sitemap.xml

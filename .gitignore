@@ -1,0 +1,14 @@
+# Donnees locales et secrets : jamais versionnes
+/storage/config/
+/storage/logs/
+/storage/data/
+/storage/tmp/*
+!/storage/tmp/index.php
+
+# Dependances installees par Composer
+/vendor/
+/composer.phar
+
+# Fichiers systeme
+Thumbs.db
+desktop.ini

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    sitemap.xml - InfoLeader (ajoute au TP 2ter)
+
+    Liste les pages publiques du site. L'espace d'administration et
+    les dossiers prives en sont volontairement absents.
+
+    Les URL pointent vers localhost : le site n'est pas publie en
+    ligne. Elles devront etre adaptees le jour d'une mise en ligne.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>http://localhost/infoleader-tp2ter/index.php</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>http://localhost/infoleader-tp2ter/products.php</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>http://localhost/infoleader-tp2ter/contact.php</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://localhost/infoleader-tp2ter/mentions-legales.php</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>http://localhost/infoleader-tp2ter/confidentialite.php</loc>
+        <lastmod>2026-10-15</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+</urlset>
