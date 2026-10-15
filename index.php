@@ -201,7 +201,29 @@ il_page_start([
                                     <span class="montant">
                                         <?php echo e(number_format((float) $produit['prix'], 2, ',', ' ')); ?>&nbsp;&euro;
                                     </span>
-                                    <a href="contact.php" class="buy">Commander</a>
+                                    <span class="mention-ttc">TTC</span>
+                                </div>
+
+                                <div class="fiche-actions">
+                                    <?php /* Meme bouton que sur le catalogue : les
+                                              attributs data-* sont lus par panier.js. */ ?>
+                                    <button type="button" class="btn-ajouter"
+                                            data-id="<?php echo e($produit['id']); ?>"
+                                            data-nom="<?php echo e($produit['nom']); ?>"
+                                            data-prix="<?php echo e(number_format((float) $produit['prix'], 2, '.', '')); ?>"
+                                            data-image="<?php echo e($produit['image']); ?>"
+                                            aria-label="Ajouter <?php echo e($produit['nom']); ?> au panier">
+                                        Ajouter au panier
+                                    </button>
+
+                                    <?php /* Le libelle « Commander » promettait une
+                                              commande inexistante sur cette page : il est
+                                              aligne sur celui du catalogue. */ ?>
+                                    <a class="buy buy--secondaire"
+                                       href="contact.php?objet=<?php echo e(urlencode('Devis : ' . $produit['nom'])); ?>"
+                                       aria-label="Demander un devis pour <?php echo e($produit['nom']); ?>">
+                                        Demander un devis
+                                    </a>
                                 </div>
                             </div>
                         </article>

@@ -9,6 +9,7 @@ Le site d'origine n'a **pas** été modifié : il reste intact pour le TP 3.
 | **Fork de travail** | `C:\wamp64\www\infoleader-tp2ter` → http://localhost/infoleader-tp2ter/ |
 | **Preuve de non-régression** | aucun fichier de code de l'original modifié (contrôlé par date de modification) ; les 3 pages d'origine répondent toujours avec une taille identique à l'octet |
 | **Base de départ** | `TODO_LIST.md`, produit au TP 2bis. Les actions reprises sont citées par leur numéro. |
+| **Suite** | Le TP 2quater a ajouté un panier et une commande simulée à ce même fork : voir [PANIER.md](PANIER.md). |
 
 ---
 

@@ -70,13 +70,29 @@ il_page_start([
                                     <span class="montant">
                                         <?php echo e(number_format((float) $produit['prix'], 2, ',', ' ')); ?>&nbsp;&euro;
                                     </span>
+                                    <span class="mention-ttc">TTC</span>
+                                </div>
+
+                                <div class="fiche-actions">
+                                    <?php /* Les attributs data-* portent les informations
+                                              du produit. assets/js/panier.js les lit au clic
+                                              et enregistre la ligne dans le localStorage.
+                                              data-prix utilise un point decimal, pour etre
+                                              exploitable directement en JavaScript. */ ?>
+                                    <button type="button" class="btn-ajouter"
+                                            data-id="<?php echo e($produit['id']); ?>"
+                                            data-nom="<?php echo e($produit['nom']); ?>"
+                                            data-prix="<?php echo e(number_format((float) $produit['prix'], 2, '.', '')); ?>"
+                                            data-image="<?php echo e($produit['image']); ?>"
+                                            aria-label="Ajouter <?php echo e($produit['nom']); ?> au panier">
+                                        Ajouter au panier
+                                    </button>
+
                                     <?php /* Le bouton s'appelait « Commander » mais ne
                                               commandait rien : il menait au formulaire de
-                                              contact. L'intitule dit maintenant la verite,
-                                              et l'objet du message est pre-rempli.
-                                              aria-label evite six liens identiques pour
-                                              un lecteur d'ecran. */ ?>
-                                    <a class="buy"
+                                              contact. Il reste utile pour une demande de
+                                              conseil, sous un intitule honnete. */ ?>
+                                    <a class="buy buy--secondaire"
                                        href="contact.php?objet=<?php echo e(urlencode('Devis : ' . $produit['nom'])); ?>"
                                        aria-label="Demander un devis pour <?php echo e($produit['nom']); ?>">
                                         Demander un devis

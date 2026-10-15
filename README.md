@@ -12,6 +12,7 @@
 > | Document | Contenu |
 > |---|---|
 > | [AMELIORATIONS.md](AMELIORATIONS.md) | Travail du TP 2ter |
+> | [PANIER.md](PANIER.md) | Panier et commande simulee (TP 2quater) |
 > | [DOCUMENTATION.md](DOCUMENTATION.md) | Analyse technique (TP 2bis) |
 > | [TODO_LIST.md](TODO_LIST.md) | Plan d ameliorations (TP 2bis) |
 > | [PROMPTS.md](PROMPTS.md) | Consignes donnees a l agent IA |

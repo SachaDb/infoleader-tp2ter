@@ -54,7 +54,7 @@ ErrorDocument 404 /infoleader-tp2ter/404.php
 </FilesMatch>
 
 # Les fichiers de documentation du projet ne sont pas du contenu public
-<FilesMatch "^(DOCUMENTATION|TODO_LIST|PROMPTS|AMELIORATIONS)\.md$">
+<FilesMatch "^(DOCUMENTATION|TODO_LIST|PROMPTS|AMELIORATIONS|PANIER)\.md$">
     Require all denied
     <IfModule !mod_authz_core.c>
         Order allow,deny

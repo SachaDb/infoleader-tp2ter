@@ -130,6 +130,11 @@ function il_page_start(array $options = [])
 
     <link rel="stylesheet" href="<?php echo e(il_asset('style.css')); ?>">
     <script src="<?php echo e(il_asset('script.js')); ?>" defer></script>
+
+    <?php /* Panier : charge sur toutes les pages, car le badge de
+              l'en-tete doit etre a jour partout. Le panier lui-meme
+              vit dans le localStorage, jamais sur le serveur. */ ?>
+    <script src="<?php echo e(il_asset('assets/js/panier.js')); ?>" defer></script>
 </head>
 <body>
 
@@ -154,6 +159,29 @@ function il_page_start(array $options = [])
                         </a>
                     </li>
                 <?php endforeach; ?>
+
+                <?php /* Panier : l'icone porte un badge avec le nombre
+                          d'articles. Le badge lui-meme est aria-hidden, et
+                          l'information est portee par une region aria-live
+                          dediee : un lecteur d'ecran annonce ainsi
+                          « Panier : 3 articles » plutot que « 3 ». */ ?>
+                <li class="menu-panier">
+                    <a class="panier-lien" href="panier.php">
+                        <span class="panier-ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="20" height="20"
+                                 fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round"
+                                 focusable="false">
+                                <circle cx="9" cy="20" r="1.6"></circle>
+                                <circle cx="18" cy="20" r="1.6"></circle>
+                                <path d="M2 3h2.2l2.6 12.1h12.4l2.2-8.4H6"></path>
+                            </svg>
+                        </span>
+                        <span class="panier-texte">Panier</span>
+                        <span class="panier-badge" id="panierBadge" aria-hidden="true" hidden>0</span>
+                    </a>
+                    <p class="sr-only" id="panierAnnonce" role="status" aria-live="polite">Panier vide</p>
+                </li>
 
                 <?php /* Bascule de theme : aria-pressed indique l'etat au
                           lecteur d'ecran. Masquee tant que JavaScript n'a pas

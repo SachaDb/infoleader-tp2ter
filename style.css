@@ -1656,3 +1656,489 @@ form.contact-form textarea:focus-visible,
 .bloc-bouton { margin-top: 26px; }
 
 .champ-facultatif { font-weight: 400; color: var(--texte-doux); }
+
+/* ============================================================
+   17. TP 2quater - PANIER ET COMMANDE SIMULEE
+   ------------------------------------------------------------
+   Reprend la palette existante via les variables : le theme
+   sombre s'applique donc automatiquement, sans regle dediee.
+   ============================================================ */
+
+/* ------------ 17.1 Icone et badge, dans l'en-tete ------------ */
+.menu-panier { display: flex; align-items: center; }
+
+.panier-lien {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 40px;
+    padding: 8px 14px;
+    color: var(--bleu-texte-pale);
+    text-decoration: none;
+    font-size: 0.86rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    transition: background var(--transition), color var(--transition),
+                border-color var(--transition);
+}
+
+.panier-lien:hover {
+    color: var(--nuit-fonce);
+    background: var(--cyan);
+    border-color: var(--cyan);
+}
+
+.panier-ico { display: inline-flex; }
+
+.panier-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--blanc);
+    background: var(--vert);
+    border-radius: 999px;
+}
+
+.panier-lien:hover .panier-badge { background: var(--nuit); }
+
+/* ------------ 17.2 Boutons des fiches produit ------------ */
+.mention-ttc {
+    font-size: 0.78rem;
+    color: var(--texte-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.fiche-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.btn-ajouter {
+    flex: 1 1 auto;
+    min-height: 44px;
+    padding: 11px 18px;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--blanc);
+    background: linear-gradient(135deg, var(--bleu), var(--bleu-clair));
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: filter var(--transition), transform var(--transition);
+}
+
+.btn-ajouter:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+.btn-ajouter--ok {
+    background: linear-gradient(135deg, var(--vert), var(--vert-clair));
+}
+
+.buy--secondaire {
+    background: transparent;
+    color: var(--bleu-tech);
+    border: 1px solid var(--bord);
+    font-weight: 600;
+}
+
+.buy--secondaire:hover { background: var(--bleu-pale); color: var(--nuit); }
+
+/* ------------ 17.3 Page panier ------------ */
+.panier-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 28px;
+    align-items: start;
+}
+
+.panier-lignes { display: grid; gap: 16px; }
+
+.panier-ligne {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) auto auto auto;
+    gap: 18px;
+    align-items: center;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+}
+
+.panier-vignette {
+    width: 96px;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: var(--rayon-s);
+    background: var(--fond-doux);
+}
+
+.panier-vignette img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.panier-nom { font-size: 1rem; color: var(--texte); margin: 0 0 4px; }
+.panier-unitaire { font-size: 0.88rem; color: var(--texte-doux); margin: 0; }
+
+.panier-quantite { display: inline-flex; align-items: center; gap: 4px; }
+
+.qte-btn {
+    width: 36px;
+    height: 36px;
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--nuit);
+    background: var(--fond-doux);
+    border: 1px solid var(--bord);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.qte-btn:hover:not(:disabled) { background: var(--bleu-pale); }
+.qte-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.qte-champ {
+    width: 56px;
+    height: 36px;
+    padding: 0 6px;
+    font: inherit;
+    text-align: center;
+    color: var(--texte);
+    background: var(--surface);
+    border: 1px solid var(--bord);
+    border-radius: 8px;
+}
+
+.panier-soustotal {
+    min-width: 92px;
+    text-align: right;
+    font-size: 1.02rem;
+    color: var(--texte);
+}
+
+.btn-supprimer {
+    min-height: 36px;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: 0.84rem;
+    color: #b91c1c;
+    background: transparent;
+    border: 1px solid var(--bord);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.btn-supprimer:hover { background: #fef2f2; border-color: #ef4444; }
+
+/* ------------ 17.4 Recapitulatifs ------------ */
+.panier-resume,
+.commande-recap {
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    position: sticky;
+    top: 92px;
+}
+
+.panier-resume h2,
+.commande-recap h2 {
+    font-size: 1.1rem;
+    color: var(--nuit);
+    margin-bottom: 16px;
+}
+
+.resume-totaux,
+.recap-totaux {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 9px 14px;
+    margin-bottom: 18px;
+    font-size: 0.94rem;
+}
+
+.resume-totaux dt,
+.recap-totaux dt { color: var(--texte-doux); }
+
+.resume-totaux dd,
+.recap-totaux dd { text-align: right; color: var(--texte); margin: 0; }
+
+.resume-final,
+.recap-final {
+    padding-top: 10px;
+    border-top: 1px solid var(--bord);
+    font-size: 1.06rem;
+    font-weight: 700;
+    color: var(--texte) !important;
+}
+
+.btn-bloc { display: block; text-align: center; }
+
+.panier-note {
+    margin-top: 14px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--texte-doux);
+}
+
+.panier-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    margin-top: 26px;
+}
+
+.btn-vider {
+    min-height: 44px;
+    padding: 11px 20px;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #b91c1c;
+    background: transparent;
+    border: 1px solid #ef4444;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+.btn-vider:hover { background: #fef2f2; }
+
+.lien-discret {
+    color: var(--bleu-tech);
+    font-size: 0.92rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.lien-discret:hover { border-bottom-color: currentColor; }
+
+/* ------------ 17.5 Tunnel de commande ------------ */
+.rappel-simulation {
+    padding: 16px 18px;
+    margin-bottom: 26px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--texte-doux);
+    background: var(--bleu-pale);
+    border-left: 4px solid var(--bleu-clair);
+    border-radius: var(--rayon-s);
+}
+
+.commande-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 28px;
+    align-items: start;
+}
+
+.commande-form h2 { font-size: 1.1rem; color: var(--nuit); margin-bottom: 18px; }
+
+.form-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+
+.champ-invalide {
+    border-color: #ef4444 !important;
+    background: #fef2f2 !important;
+}
+
+.recap-lignes { list-style: none; margin: 0 0 18px; padding: 0; }
+
+.recap-lignes li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--bord);
+    font-size: 0.92rem;
+}
+
+.recap-nom { color: var(--texte); }
+.recap-qte { color: var(--texte-doux); }
+.recap-montant { text-align: right; color: var(--texte); font-weight: 600; }
+
+/* ------------ 17.6 Ecran de confirmation ------------ */
+.zone-impression {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 34px 32px;
+    background: var(--surface);
+    border: 1px solid var(--bord);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+}
+
+.confirmation-entete {
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    border-bottom: 2px solid var(--bleu-clair);
+}
+
+.confirmation-entete h2 {
+    font-size: 1.4rem;
+    color: var(--vert);
+    margin-bottom: 8px;
+}
+
+.confirmation-numero {
+    font-size: 1.05rem;
+    color: var(--texte);
+    letter-spacing: 0.04em;
+}
+
+.confirmation-date { font-size: 0.9rem; color: var(--texte-doux); }
+
+.confirmation-corps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 24px;
+}
+
+.confirmation-corps h3 { font-size: 0.96rem; color: var(--nuit); margin-bottom: 10px; }
+.confirmation-corps p { font-size: 0.93rem; line-height: 1.7; color: var(--texte-doux); }
+
+.confirmation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--bord);
+}
+
+/* ------------ 17.7 Responsive ------------ */
+@media (max-width: 980px) {
+    .panier-grille,
+    .commande-grille { grid-template-columns: 1fr; }
+
+    .panier-resume,
+    .commande-recap { position: static; }
+}
+
+@media (max-width: 760px) {
+    /* Une ligne de panier devient une carte empilee : aucun
+       defilement horizontal, tout reste lisible au doigt. */
+    .panier-ligne {
+        grid-template-columns: 76px minmax(0, 1fr);
+        grid-template-areas:
+            "vignette info"
+            "quantite quantite"
+            "total    supprimer";
+        gap: 14px;
+    }
+
+    .panier-vignette  { grid-area: vignette; width: 76px; }
+    .panier-info      { grid-area: info; }
+    .panier-quantite  { grid-area: quantite; }
+    .panier-soustotal { grid-area: total; text-align: left; font-weight: 700; }
+    .panier-supprimer { grid-area: supprimer; text-align: right; }
+
+    .form-duo { grid-template-columns: 1fr; }
+    .confirmation-corps { grid-template-columns: 1fr; gap: 22px; }
+    .zone-impression { padding: 24px 20px; }
+
+    .menu-panier { padding: 14px 4px 0; }
+    .panier-lien { width: 100%; justify-content: center; min-height: 44px; }
+
+    .fiche-actions { flex-direction: column; align-items: stretch; }
+    .buy--secondaire { text-align: center; }
+}
+
+/* ------------ 17.8 Impression du recapitulatif ------------
+   Tout l'habillage du site disparait : seul le recapitulatif de
+   commande est imprime, en noir sur blanc. L'utilisateur peut
+   imprimer ou enregistrer en PDF depuis son navigateur, sans
+   aucune bibliotheque PDF.
+   ---------------------------------------------------------- */
+@media print {
+    .site-header,
+    .site-footer,
+    .page-title,
+    .skip-link,
+    .no-print,
+    noscript,
+    #etapeVide,
+    #etapeFormulaire { display: none !important; }
+
+    html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .section { padding: 0 !important; }
+
+    .zone-impression {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        background: transparent !important;
+        border: 0 !important;
+        border-radius: 0;
+        box-shadow: none !important;
+    }
+
+    .confirmation-entete { border-bottom: 2px solid #000000; }
+
+    .confirmation-entete h2,
+    .confirmation-numero,
+    .confirmation-corps h3,
+    .recap-nom,
+    .recap-montant,
+    .recap-final { color: #000000 !important; }
+
+    .confirmation-date,
+    .confirmation-corps p,
+    .recap-qte { color: #333333 !important; }
+
+    /* La mention de simulation reste visible sur le papier : un
+       recapitulatif imprime ne doit pas passer pour une facture. */
+    .rappel-simulation--print {
+        display: block !important;
+        background: transparent !important;
+        border: 1px solid #000000 !important;
+        border-left-width: 1px !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+    }
+
+    .recap-lignes li,
+    .recap-totaux { border-color: #999999 !important; }
+
+    a[href]::after { content: "" !important; }
+
+    .confirmation-corps section { page-break-inside: avoid; }
+}
+
+/* Les liens d'action autonomes doivent eux aussi atteindre la
+   taille de cible minimale sur mobile (WCAG 2.5.8). Mesure avant
+   correction : « Modifier le panier » faisait 115 x 21 px. */
+@media (max-width: 760px) {
+    .lien-discret {
+        display: inline-block;
+        min-height: 44px;
+        padding: 11px 0;
+        line-height: 1.4;
+    }
+}

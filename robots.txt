@@ -20,4 +20,8 @@ Disallow: /vendor/
 # Donnees brutes du catalogue
 Disallow: /products.json
 
+# Panier et commande : propres a chaque visiteur, rien a indexer
+Disallow: /panier.php
+Disallow: /commande.php
+
 Sitemap: http://localhost/infoleader-tp2ter/sitemap.xml
